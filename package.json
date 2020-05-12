@@ -1,0 +1,30 @@
+{
+  "name": "boomybot",
+  "version": "1.0.0",
+  "description": "A specialized Discord bot for Alaska's server.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slushy-swishlol/boomybot.git"
+  },
+  "author": "slushy-swishlol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slushy-swishlol/boomybot/issues"
+  },
+  "homepage": "https://github.com/slushy-swishlol/boomybot#readme",
+  "dependencies": {
+    "@discordjs/opus": "^0.3.2",
+    "discord.js": "^12.2.0",
+    "discord.js-commando": "^0.10.0",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-binaries": "^3.2.2-3",
+    "ffmpeg-static": "^4.2.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "popyt": "^3.1.0",
+    "ytdl-core": "^2.1.2"
+  }
+}
