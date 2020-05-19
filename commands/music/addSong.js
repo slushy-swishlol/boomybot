@@ -1,7 +1,8 @@
 const ytdl = require('ytdl-core');
 const nowplaying = require('./nowPlaying.js');
 const { YouTube } = require('popyt');
-const { apiKey } = require('../../config.json');
+//const { apiKey } = require('../../config.json');
+const apiKey = process.env.apiKey;
 const Discord = require('discord.js');
 
 module.exports = {

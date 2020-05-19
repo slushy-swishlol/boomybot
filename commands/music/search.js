@@ -1,6 +1,7 @@
 const { YouTube } = require('popyt');
 const Discord = require('discord.js');
-const { apiKey } = require('../../config.json');
+//const { apiKey } = require('../../config.json');
+const apiKey = process.env.apiKey;
 const addSong = require('./addSong.js');
 
 module.exports = {
