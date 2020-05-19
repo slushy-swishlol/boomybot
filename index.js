@@ -6,29 +6,20 @@ const {
     token,
 } = require('./config.json');
 
-//Create client
+//Client Properties
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+client.queue = new Map();
 
-const musicCommands = fs.readdirSync('./commands/music').filter(file => file.endsWith('.js'));
-const splatoonCommands = fs.readdirSync('./commands/splatoon').filter(file => file.endsWith('.js'));
-const generalCommands = fs.readdirSync('./commands/general').filter(file => file.endsWith('.js'));
-
-for (const file of musicCommands) {
-    const command = require(`./commands/music/${file}`);
-    client.commands.set(command.name, command);
+//Read through commands directory and get all command files
+const commandDir = fs.readdirSync('./commands');
+for (const folder of commandDir){
+    const folderCommands = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+    for (const file of folderCommands) {
+        const command = require(`./commands/${folder}/${file}`);
+        client.commands.set(command.name, command);
+    }
 }
-for (const file of splatoonCommands) {
-    const command = require(`./commands/splatoon/${file}`);
-    client.commands.set(command.name, command);
-}
-for (const file of generalCommands) {
-    const command = require(`./commands/general/${file}`);
-    client.commands.set(command.name, command);
-}
-
-//Music Variables
-client.queue = new Map(); //List of songs that are currently queued.
 
 //Status Checks
 client.on('ready', () => {
@@ -39,13 +30,15 @@ client.on('ready', () => {
 client.on('message', message => {
     //Don't respond to other bots
     if (message.author.bot) return;
+    if (!message.content.startsWith(prefix)) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
     const command = client.commands.get(commandName)
         || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-    if (!command) return;
+        
+    if (!command) return message.channel.send(`That is not a valid command, ${message.author}!`);
 
     try {
         if (command.args){

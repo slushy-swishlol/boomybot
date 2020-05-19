@@ -14,9 +14,15 @@ module.exports = {
             return message.channel.send('There are no songs currently playing.');
         }
         const npEmbed = new Discord.MessageEmbed()
-            .setTitle('Now Playing')
+            .setAuthor('Now Playing', message.author.avatarURL())
+            .setTitle(serverQueue.songs[0].title)
+            .setURL(serverQueue.songs[0].url)
+            .setThumbnail(serverQueue.songs[0].thumbnail)
             .setColor(0xff0000)
-            .setDescription(serverQueue.songs[0].title);
+            .addFields(
+                { name: 'Duration', value: serverQueue.songs[0].duration, inline: true },
+                { name: 'Channel', value: serverQueue.songs[0].channel, inline: true }
+            );
         message.channel.send(npEmbed);
     }
 }

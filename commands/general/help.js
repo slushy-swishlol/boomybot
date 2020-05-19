@@ -37,7 +37,7 @@ module.exports = {
 
         data.push(`**Aliases:** ${command.aliases.join(', ')}`);
         data.push(`**Description:** ${command.description}`);
-        data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
+        data.push(`**Usage:** \`${prefix}${command.name} ${command.usage}\``);
 
         message.channel.send(data, { split: true });
 

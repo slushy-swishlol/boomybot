@@ -7,6 +7,9 @@ module.exports = {
     execute(message){
         const { queue } = message.client;
         const serverQueue = queue.get(message.guild.id);
+        if (!message.member.permissions.has('ADMINISTRATOR')){
+            return message.channel.send("You must be an admin to skip the song!");
+        }
 
         if (!message.member.voice.channel){
             return message.channel.send("You have to be in a voice channel to skip a song!" );
